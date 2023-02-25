@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>bipolar.js</title>
+    <script type="module">
+      import "https://thewhodidthis.github.io/cutaway/main.js"
+      import { assert, report } from "https://thewhodidthis.github.io/tapeless/main.js"
+      import bender from "./main.js"
+      import stream from "./stream.js"
+
+      const { equal, ok } = assert
+
+      {
+        const filter = bender()
+        const result = filter()
+
+        equal
+          .describe("returns lamda on init")
+          .test(typeof filter, "function")
+
+        ok
+          .describe("lamda returns array on call", "will return")
+          .test(Array.isArray(result))
+
+        const i = 1
+        const output = bender(0, i)(i, i)
+        const [x, y] = output
+
+        equal
+          .describe("is up")
+          .test(x, 1)
+          .describe("is down")
+          .test(y, 0)
+          .describe("input/output length is a match", "will compute")
+          .test(output.length, 2)
+      }
+
+      {
+        const offset = 100
+        const filter = stream(offset)
+
+        ok
+          .describe("is a transform stream", "does inherit")
+          .test(filter instanceof TransformStream)
+
+        const writer = filter.writable.getWriter()
+        const reader = filter.readable.getReader()
+
+        writer.write(offset.toString())
+
+        const { value } = await reader.read()
+
+        equal
+          .describe("math looks accurate", "will compute")
+          .test(parseInt(value, 10), offset - offset)
+      }
+
+      report()
+    </script>
+  </head>
+  <body></body>
+</html>
