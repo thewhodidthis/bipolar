@@ -32,7 +32,7 @@ npm install thewhodidthis/bipolar
 ## usage
 ### main
 
-Instantiate with a set of starting values, then call repeatedly to access resulting delta values. For example:
+Initialize with a series of values, then call repeatedly to produce successive deltas for each argument collected in an array. For example:
 
 ```js
 import bipolar from "https://thewhodidthis.github.io/bipolar/main.js"
@@ -41,7 +41,7 @@ const filter = bipolar(0, 0)
 
 // Log differences in position between clicks.
 document.addEventListener("click", ({ x, y }) => {
-  console.log(filter(x, y))
+  console.log(...filter(x, y))
 })
 ```
 
