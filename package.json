@@ -1,0 +1,21 @@
+{
+  "name": "bipolar",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Helps detect change",
+  "homepage": "https://github.com/thewhodidthis/bipolar#readme",
+  "bugs": "https://github.com/thewhodidthis/bipolar/issues",
+  "repository": "github:thewhodidthis/bipolar",
+  "license": "ISC",
+  "author": "Thepersonwhodidthis <me@thewhodidthis.com> (http://thewhodidthis.com)",
+  "engines": {
+    "node": ">=14.17.0",
+    "npm": ">=6.14.13"
+  },
+  "main": "./main.js",
+  "type": "module",
+  "exports": {
+    ".": "./main.js",
+    "stream": "./stream.js"
+  }
+}
